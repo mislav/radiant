@@ -5,9 +5,9 @@
     %h1 Personal Preferences
   - main.edit_form do
     - form_for @user, :url => admin_preferences_url, :html => { :method => :put, 'data-onsubmit_status' => "Saving preferences&#8230;" } do |f|
-      = render_region :form_top
+      = render_region :form_top, :locals => {:f => f}
       
-      - render_region :form do |form|
+      - render_region :form, :locals => {:f => f} do |form|
         - form.edit_name do
           %p
             = f.label :name
@@ -26,7 +26,7 @@
         - form.edit_password do
           = render "admin/users/password_fields", :f => f
       
-      - render_region :form_bottom do |form_bottom|
+      - render_region :form_bottom, :locals => {:f => f} do |form_bottom|
         - form_bottom.edit_buttons do
           %p.buttons
             = save_model_button @user

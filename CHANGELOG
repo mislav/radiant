@@ -2,6 +2,7 @@
 
 === Edge
 
+* Exposed important view locals for partials that hook into the admin UI [Mislav Marohnić]
 * Refactored Sass to separate out common styles [Jim Gay]
 * Upgraded to HAML 2.2.19 [Jim Gay]
 * Add future publishing feature [Anna Billstrom, Benny Degezelle, Jim Gay]

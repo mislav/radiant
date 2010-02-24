@@ -1,8 +1,8 @@
 = fields.hidden_field :lock_version
 = fields.hidden_field :parent_id
-= render_region :form_top
+= render_region :form_top, :locals => {:f => fields}
 
-- render_region :form do |form|
+- render_region :form, :locals => {:f => fields} do |form|
   - form.edit_title do
     %p.title
       %label{:for=>"page_title"}
@@ -23,7 +23,7 @@
             = image('add_tab', :alt=>"Add Part", :title=>"")
       #pages.pages
         = render :partial => 'admin/page_parts/page_part', :collection => @page.parts
-    = render_region :parts_bottom
+    = render_region :parts_bottom, :locals => {:f => fields}
   - form.edit_layout_and_type do
     .row
       %p
@@ -40,7 +40,7 @@
         = fields.text_field :published_at, :class=> "date", :value => (@page.published_at? ? @page.published_at.to_date.to_formatted_s(:long) : nil)
       = render_region :layout_row, :locals => {:f => fields}
 
-- render_region :form_bottom do |form_bottom|
+- render_region :form_bottom, :locals => {:f => fields} do |form_bottom|
   - form_bottom.edit_buttons do
     - @buttons_partials.each do |partial|
       = render :partial => partial, :locals => {:f => fields}
