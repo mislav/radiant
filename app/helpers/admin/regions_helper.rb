@@ -7,6 +7,9 @@ module Admin::RegionsHelper
       block.call(default_partials)
       options[:locals][:defaults] = default_partials
     end
+    @current_region_name = options[:locals][:region_name]
+    @current_region_partials = default_partials
+    
     output = @region_set[region].compact.map do |partial|
       begin
         render options.merge(:partial => partial)
@@ -16,7 +19,21 @@ module Admin::RegionsHelper
         raise e
       end
     end.join
+    @current_region_name = @current_region_partials = nil
     block_given? ? concat(output) : output
+  end
+  
+  # helper for extension partials to add to regions
+  #
+  # Example:
+  #   - extend_region :thead do |thead|
+  #     - include_stylesheet 'admin/extra_styles'
+  #     - thead.custom_header do
+  #       %th.custom Custom
+  def extend_region(region, &block)
+    if region.to_sym == @current_region_name
+      block.call(@current_region_partials)
+    end
   end
 
   def lazy_initialize_region_set
