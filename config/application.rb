@@ -1,9 +1,10 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
 
-# Auto-require default libraries and those for the current Rails environment.
-Bundler.require Rails.env
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'radiant/cache'
+
+Bundler.require :default, Rails.env
 
 module Radiant
   class Application < Rails::Application
@@ -48,7 +49,7 @@ module Radiant
     #  :metastore => "radiant:tmp/cache/meta"
     #    Sets the meta store type and storage location.  We recommend you use
     #    radiant: since this will enable manual expiration and acceleration headers.
-    config.middleware.use ::Radiant::Cache
+    config.middleware.use Radiant::Cache
 
     # Configure generators values. Many other options are available, be sure to check the documentation.
     config.generators do |g|
