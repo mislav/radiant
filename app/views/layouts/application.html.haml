@@ -20,7 +20,7 @@
       #header
         - if logged_in?
           #site_links
-            = %{Logged in as #{link_to h(current_user.name), edit_admin_preferences_path} &nbsp; (#{link_to "Logout", logout_path})}
+            == Logged in as #{link_to h(current_user.name), edit_admin_preference_path} &nbsp; (#{link_to "Logout", logout_path})
             &nbsp;
             = link_to "View Site", root_path, :id=>"view_site"
           %ul#navigation
