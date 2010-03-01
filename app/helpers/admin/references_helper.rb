@@ -5,7 +5,7 @@ module Admin::ReferencesHelper
         output << render(:partial => "admin/references/tag_reference.haml", 
             :locals => {:tag_name => tag_name, :description => description})
       end
-    end
+    end.html_safe
   end
   
   def filter_reference
