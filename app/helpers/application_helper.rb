@@ -3,7 +3,7 @@ module ApplicationHelper
   include Admin::RegionsHelper
   include Radiant::LegacyRoutes
 
-  def config
+  def radiant_config
     Radiant::Config
   end
 
@@ -12,11 +12,11 @@ module ApplicationHelper
   end
 
   def title
-    config['admin.title'] || 'Radiant CMS'
+    radiant_config['admin.title'] || 'Radiant CMS'
   end
 
   def subtitle
-    config['admin.subtitle'] || 'Publishing for Small Teams'
+    radiant_config['admin.subtitle'] || 'Publishing for Small Teams'
   end
 
   def logged_in?

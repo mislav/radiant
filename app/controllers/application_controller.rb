@@ -13,13 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_javascripts_and_stylesheets
   before_filter :set_standard_body_style, :only => [:new, :edit, :update, :create]
   
-  attr_accessor :config, :cache
-  
-  def initialize
-    super
-    @config = Radiant::Config
-  end
-  
   # helpers to include additional assets from actions or views
   helper_method :include_stylesheet, :include_javascript
   
