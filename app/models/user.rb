@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :login, :message => 'login already in use'
 
   validates_confirmation_of :password, :message => 'must match confirmation', :if => :confirm_password?
+  
+  after_initialize :confirm_password
 
   validates_presence_of :name, :login, :message => 'required'
   validates_presence_of :password, :password_confirmation, :message => 'required', :if => :new_record?
@@ -54,7 +56,7 @@ class User < ActiveRecord::Base
     self.password == sha1(password)
   end
 
-  def after_initialize
+  def confirm_password
     @confirm_password = true
   end
 
