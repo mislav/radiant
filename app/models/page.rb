@@ -14,6 +14,8 @@ class Page < ActiveRecord::Base
   belongs_to :layout
   belongs_to :created_by, :class_name => 'User'
   belongs_to :updated_by, :class_name => 'User'
+  
+  DEFAULT_PAGE_PARTS = %w[body]
 
   # Validations
   validates_presence_of :title, :slug, :breadcrumb, :status_id, :message => 'required'
@@ -228,7 +230,8 @@ class Page < ActiveRecord::Base
     end
 
     def new_with_defaults(config = Radiant::Config)
-      default_parts = config['defaults.page.parts'].to_s.strip.split(/\s*,\s*/)
+      default_parts = config['defaults.page.parts'].presence || DEFAULT_PAGE_PARTS
+      default_parts = default_parts.strip.split(/\s*,\s*/) if String === default_parts
       page = new
       default_parts.each do |name|
         page.parts << PagePart.new(:name => name, :filter_id => config['defaults.page.filter'])
