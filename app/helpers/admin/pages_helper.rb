@@ -11,7 +11,14 @@ module Admin::PagesHelper
   end
   
   def filter
-    @page.parts.empty? ? nil : @page.parts.first.filter
+    if @page
+      @page.parts.empty? ? nil : @page.parts.first.filter
+    else
+      @filter ||= begin
+        filter_name = params[:filter_name]
+        (filter_name.gsub(" ", "") + "Filter").constantize unless filter_name.blank?
+      end
+    end
   end
 
   def default_filter_name
