@@ -1,15 +1,21 @@
 require 'ostruct'
+
 module Radiant
   module ResourceResponses
     def self.extended(base)
-      base.send :class_inheritable_writer, :responses
+      class << base
+        attr_writer :responses
+      end
+      base.responses = Collector.new
       base.send :include, InstanceMethods
     end
     
     def responses
-      r = (self.responses = read_inheritable_attribute(:responses) || Collector.new)
-      yield r if block_given?
-      r
+      unless @responses
+        self.responses = self.superclass.responses.dup
+      end
+      yield @responses if block_given?
+      @responses
     end
     
     module InstanceMethods
