@@ -3,15 +3,15 @@ module Admin::PagesHelper
   include Admin::ReferencesHelper
   
   def class_of_page
-    @page.class
+    if @page
+      @page.class
+    else
+      @page_class ||= (params[:class_name].presence || 'Page').constantize
+    end
   end
   
   def filter
     @page.parts.empty? ? nil : @page.parts.first.filter
-  end
-  
-  def meta_errors?
-    !!(@page.errors[:slug] or @page.errors[:breadcrumb])
   end
 
   def default_filter_name
