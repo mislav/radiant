@@ -461,9 +461,9 @@ describe Page, "class" do
   end
 
   it 'should list decendants' do
-    descendants = Page.descendants
-    assert_kind_of Array, descendants
-    assert_match /PageSpecTestPage/, descendants.inspect
+    descendents = Page.descendents
+    assert_kind_of Array, descendents
+    assert_match /PageSpecTestPage/, descendents.inspect
   end
 
   it 'should allow initialization with empty defaults' do

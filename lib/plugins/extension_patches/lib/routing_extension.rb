@@ -18,7 +18,7 @@ module Radiant
     private
   
       def add_extension_routes(mapper)
-        Extension.descendants.each do |ext|
+        Extension.descendents.each do |ext|
           ext.route_definitions.each do |block|
             block.call(mapper)
           end

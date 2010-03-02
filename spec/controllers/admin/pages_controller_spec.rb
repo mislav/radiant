@@ -195,7 +195,7 @@ describe Admin::PagesController do
     integrate_views
 
     # TODO: This should be in a view or integration spec
-    it "should render the expanded descendants of the page being removed" do
+    it "should render the expanded descendents of the page being removed" do
       get :remove, :id => page_id(:parent), :format => 'html' # shouldn't need this!
       rendered_pages = [:parent, :child, :grandchild, :great_grandchild, :child_2, :child_3].map {|p| pages(p) }
       rendered_pages.each do |page|

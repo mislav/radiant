@@ -15,7 +15,7 @@
         - form.edit_filter do
           %p
             = f.label :filter_id, "Filter"
-            = f.select :filter_id, [['none', '']] + TextFilter.descendants.map { |f| f.filter_name }.sort, :id => 'snippet_filter'
+            = f.select :filter_id, [['none', '']] + TextFilter.descendents.map { |f| f.filter_name }.sort, :id => 'snippet_filter'
             %span.reference_links
               Reference:
               %span{:id => "filter_reference_link"}

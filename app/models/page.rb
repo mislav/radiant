@@ -161,7 +161,7 @@ class Page < ActiveRecord::Base
         found = child.find_by_url(url, live, clean)
         return found if found
       end
-      file_not_found_types = ([FileNotFoundPage] + FileNotFoundPage.descendants)
+      file_not_found_types = ([FileNotFoundPage] + FileNotFoundPage.descendents)
       file_not_found_names = file_not_found_types.collect { |x| x.name }
       condition = (['class_name = ?'] * file_not_found_names.length).join(' or ')
       condition = "status_id = #{Status[:published].id} and (#{condition})" if live
@@ -211,7 +211,7 @@ class Page < ActiveRecord::Base
     end
 
     def load_subclasses
-      ([RADIANT_ROOT] + Radiant::Extension.descendants.map(&:root)).each do |path|
+      ([RADIANT_ROOT] + Radiant::Extension.descendents.map(&:root)).each do |path|
         Dir["#{path}/app/models/*_page.rb"].each do |page|
           $1.camelize.constantize if page =~ %r{/([^/]+)\.rb}
         end
@@ -239,7 +239,7 @@ class Page < ActiveRecord::Base
     end
 
     def is_descendant_class_name?(class_name)
-      (Page.descendants.map(&:to_s) + [nil, "", "Page"]).include?(class_name)
+      (Page.descendents.map(&:to_s) + [nil, "", "Page"]).include?(class_name)
     end
 
     def descendant_class(class_name)
