@@ -175,6 +175,10 @@ module ApplicationHelper
     end
     overrides.html_safe
   end
+  
+  def link_to_function(text, code)
+    link_to(text, '#', :onclick => "#{code}; return false")
+  end
 
   private
 
