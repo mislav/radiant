@@ -7,6 +7,8 @@ rescue LoadError
   Bundler.setup
 end
 
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
 module Radiant
   def self.loaded_via_gem?
     false

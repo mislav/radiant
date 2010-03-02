@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'radiant/cache'
 require 'radiant/admin_ui'
 
