@@ -3,6 +3,7 @@ require 'rails/all'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'radiant/cache'
+require 'radiant/admin_ui'
 
 Bundler.require :default, Rails.env
 
@@ -66,6 +67,8 @@ module Radiant
       require 'sass/plugin'
       Haml::Template.options[:format] = :html5
       Haml::Template.options[:ugly] = true if ENV['RAILS_ENV'] == 'production'
+      
+      AdminUI.instance.load_default_nav
     end
     
     config.action_view.field_error_proc = Proc.new do |html, instance|
