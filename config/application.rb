@@ -61,12 +61,14 @@ module Radiant
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters << :password
     
-    config.after_initialize do
+    initializer "haml" do
       require 'haml/template'
       require 'sass/plugin'
       Haml::Template.options[:format] = :html5
-      Haml::Template.options[:ugly] = true if ENV['RAILS_ENV'] == 'production'
-      
+      Haml::Template.options[:ugly] = Rails.env.production?
+    end
+    
+    initializer "admin_ui" do
       AdminUI.instance.load_default_nav
     end
     
